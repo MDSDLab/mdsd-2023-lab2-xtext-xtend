@@ -1,0 +1,27 @@
+webtest example.JavaScriptTest
+
+page Bootstrap
+  set largeModal to button "Large modal"
+  set largeDialog to div "myLargeModalLabel"
+end
+
+page ModalDialog
+  set close to button "Close"
+end
+
+operation HighlightAndClick using element
+  javascript "arguments[0].style.outline = 'red solid 4px'; arguments[0].style.outlineOffset = '-4px'; arguments[0].scrollIntoView({ block: 'center', inline: 'center' });" using element
+  wait 1 seconds
+  javascript "arguments[0].style.outline = ''; arguments[0].style.outlineOffset = '';" using element
+  click element
+end
+
+test largeModalTest
+  open "https://getbootstrap.com/docs/4.0/components/modal/"
+  context as Bootstrap
+  	HighlightAndClick using largeModal
+  	context largeDialog as ModalDialog
+      HighlightAndClick using close
+  	end
+  end
+end

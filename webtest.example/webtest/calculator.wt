@@ -1,0 +1,45 @@
+webtest example.CalculatorTest
+
+page Calculator
+  set display to input "number display"
+  set clear to button "AC"
+  set add to button "+"
+  set subtract to button "-"
+  set multiply to button "×"
+  set divide to button "/"
+  set compute to button "="
+  
+  operation binaryOperation using left,op,right
+    click clear
+    fill display with left
+    click op
+    fill display with right
+    click compute
+  end
+  
+  operation multiply using left,right
+    binaryOperation using left,multiply,right
+  end
+end
+
+test mul1
+  open "https://www.calculatorsoup.com/calculators/math/basic.php"
+  context as Calculator
+    wait until display exists
+    print "Page opened"
+    multiply using "23","6"
+    assert display is "138"
+    capture page
+  end
+end
+
+set timeout to 10
+open "https://www.calculatorsoup.com/calculators/math/basic.php"
+wait timeout seconds until input "number display" exists 
+click button "AC"
+fill input "number display" with "23"
+click button "×"
+fill input "number display" with "6"
+click button "="
+assert input "number display" is "138"
+capture page

@@ -1,0 +1,28 @@
+webtest example.ManualTest
+
+operation Click using element
+  capture element
+  click element
+end
+
+operation Fill using element,text
+  fill element with text
+  capture element
+end
+
+manual LetMeGoogleThatForYou
+  print "<h1>Google keresés</h1>"
+  print "<p>Nyissuk meg a <b>https://www.google.com</b> oldalt:</p>"
+  open "https://www.google.com"
+  capture page
+  print "<p>Fogadjuk el a cookie-kat:</p>"
+  Click using button "L2AGLb"
+  set searchText to "jwst"
+  print "<p>Írjuk be a keresőbe a <b>",searchText,"</b> szöveget:</p>"
+  Fill using textarea "q", searchText
+  print "<p>Végül kattintsunk a <b>Google-keresés</b> gombra:</p>"
+  Click using input "btnK"
+  wait 2 seconds
+  print "<p>És láthatjuk a keresési találatokat:</p>"
+  capture page
+end

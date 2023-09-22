@@ -1,0 +1,72 @@
+webtest example.BasePagesTest
+
+page WizardPage
+  set next to button "Next"
+  set previous to button "Previous"
+end
+
+page Name : WizardPage
+  set firstName to input "First name..."
+  set lastName to input "Last name..."
+end
+
+page ContactInfo : WizardPage
+  set email to input "E-mail..."
+  set phone to input "Phone..."
+end
+
+page Birthday : WizardPage
+  set day to input "dd"
+  set month to input "mm"
+  set year to input "yyyy"
+end
+
+page LoginInfo : WizardPage
+  set username to input "Username..."
+  set password to input "Password..."
+  set submit to button "Submit"
+end
+
+open "https://www.w3schools.com/howto/howto_js_form_steps.asp"
+wait 1 seconds
+click div "accept-choices"
+
+context as Name
+  fill firstName with "Agent"
+  fill lastName with "Smith"
+  wait 1 seconds
+  click next
+end
+
+context as ContactInfo
+  fill email with "smith@matrix.com"
+  fill phone with "5551234"
+  wait 1 seconds
+  click next
+end
+
+context as Birthday
+  fill day with "01"
+  fill month with "01"
+  fill year with "2000"
+  wait 1 seconds
+  click previous
+end
+
+context as ContactInfo
+  fill phone with "5554321"
+  wait 1 seconds
+  click next
+end
+
+context as Birthday
+  wait 1 seconds
+  click next
+end
+
+context as LoginInfo
+  fill username with "smith"
+  fill password with "secret"
+  wait 1 seconds
+  click submit
+end

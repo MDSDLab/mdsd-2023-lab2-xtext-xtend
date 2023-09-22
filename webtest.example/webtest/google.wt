@@ -1,0 +1,14 @@
+webtest example.GoogleTest
+
+operation search using text
+  fill textarea "q" with text
+  click input "btnK"
+end
+
+open "https://www.google.com"
+set acceptCookies to button "L2AGLb"
+if acceptCookies exists then
+	click acceptCookies
+end
+search using "jwst"
+wait 2 seconds
